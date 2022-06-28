@@ -1,0 +1,38 @@
+@mixin ItemBasic {
+    display: flex;
+    align-items: center;
+}
+
+.TodoListItem {
+    padding: 1rem; // 칸
+    @include ItemBasic();
+    &:nth-child(even) {
+        background: #f6e9eb;
+    } // TodoListitem의 자식들 중 짝수번 자식들에게만 background 적용
+    .checkbox {
+        cursor: pointer;
+        flex: 1; // 차지 할 수 있는 영역 모두 차지
+        @include ItemBasic();
+        .text {
+            margin-left: 1rem;
+            flex: 1;
+        }
+        &.checked { // 체크되었을 때의 스타일
+            // &는 현재 클래스를 의미
+            .text {
+                color: #adb5bd;
+                text-decoration: line-through; // 줄 긋기
+            }
+        }
+    }
+    .remove {
+        @include ItemBasic();
+        font-size: 1.5rem;
+        cursor: pointer;
+    }
+
+    // 엘리먼트 사이사이에 테두리를 넣어줌
+    & + & {
+        border-top: 2px dotted #dee2e6;
+    }
+}

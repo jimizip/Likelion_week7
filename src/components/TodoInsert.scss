@@ -1,0 +1,36 @@
+$white: white;
+
+.TodoInsert { // $변수명: 속성값
+    display: flex; // 자신이 가진 내용물의 width만큼만 차지
+    background: #696969; // dimgray
+
+    @mixin basic { // 재사용
+        background: none;
+        outline: none;
+        border: none;
+    }
+
+    input {
+        @include basic();
+        padding: 0.7rem;
+        font-size: 1.0rem;
+        line-height: 1.5;
+        color: $white;
+        &::placeholder {
+            color: $white;
+        }
+        flex: 1; // 엔터 버튼의 위치
+    }
+    button {
+        @include basic();
+        background: #868e96;
+        color: $white;
+        /*padding-left: 0.75rem; 엔터 넓이
+        padding-right: 0.75rem;  엔터 넓이 */
+        padding: auto 0.75rem; // 단축 속성
+        font-size: 1.5rem;
+        display: flex;
+        align-items: center; // 하트 위치
+        cursor: pointer; // 커서 모양
+    }
+}

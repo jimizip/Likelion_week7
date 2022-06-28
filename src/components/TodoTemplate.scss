@@ -1,0 +1,29 @@
+$white: white;
+
+.TodoTemplate {
+    width: 500px;
+
+    // 가로 중앙 정렬
+    /*margin-left: auto;
+    margin-right: auto;
+    margin-top: 6rem;*/
+    margin: 6rem auto auto auto; // 단축 속성
+    border-radius: 10px;
+    overflow: auto;
+    
+    .app-title {
+        background: #ffb6c1;
+        color: $white;
+        font-weight: bold;
+        height: 5rem;
+        font-size: 2rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: not-allowed;
+    }
+
+    .content {
+        background: $white;
+    }
+}
