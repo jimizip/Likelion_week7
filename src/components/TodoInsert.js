@@ -2,29 +2,29 @@ import React, { useState, useCallback } from 'react';
 import './TodoInsert.scss';
 
 const TodoInsert = ({ onInsert }) => {
-    // 입력을 위한 state
+    // 입력을 하기 위해 
     const [value, setValue] = useState('');
 
-    // 최초 렌더링 후 재사용 가능한 callback
+    // 바뀐 값을 가져온다.
     const onChange = useCallback(e => {
         setValue(e.target.value);
     },[]);
 
     const onSubmit = useCallback(e => {
         onInsert(value);
-        setValue(''); // 삽입 후 value 초기화
+        setValue(''); 
+        // 값을 넣어준 뒤 값을 다시 초기화 시켜준다.
 
-        // submit 이벤트는 기본적으로 새로고침을 발생시키킨다
-        // 때문에 preventDefault를 통해 기본 동작을 막는다
+       // 새로 고침을 방지하기 위해서 preventDefault를 사용해준다.
         e.preventDefault();
-    },[onInsert, value]);
+    },[onInsert, value]); // value와 setValue를 사용해주었으니 의존성 리스트에 넣어줌.
 
     return(
         <form className="TodoInsert" onSubmit={onSubmit}>
             <input
-                placeholder="Write a To Do and Press Enter"
-                value={value}
-                onChange={onChange}
+                placeholder="Write a To Do and Press Enter" // 입력칸
+                value={value} // 값
+                onChange={onChange} // 바뀐 값
             />
             <button type="submit">
                 💛

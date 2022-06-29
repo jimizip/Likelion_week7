@@ -7,7 +7,7 @@ import {
   useRecoilState,
   useRecoilValue,
 } from "recoil";
-import { todos } from "./atoms/todos";
+import { todos } from "./atoms/todos"; // recoil
 const App = () => {
 
   //const [todos, setTodos] = useState([]); // 배열 안에 아무것도 없다면 한 줄로
@@ -22,19 +22,19 @@ const App = () => {
         text,
         checked: false,
       };
-      // concat으로 원본배열은 보존하고 새로운 복사 배열 생성
+      // concat을 사용하면 기존 배열의 마지막 부분에 배열을 추가시켜준다.
       setTodoLists(todoLists.concat(todo));
-      nextId.current += 1; // nextId 증가
+      nextId.current += 1; // nextId의 값을 1 증가 시켜준다.
     },
-    [todoLists, setTodoLists]
+    [todoLists, setTodoLists] // todoLists 와 setTodoLists 사용으로 의존성 리스트 작성
   );
 
   const onRemove = useCallback(
     id => {
-      // filter를 통해 선택된 값 이외의 배열을 모두 출력
+      // filter는 test를 통과하는 요소들을 새로운 배열로 반환하는데, filter 기능을 이용하여 삭제를 한다.
       setTodoLists(todoLists.filter(todo => todo.id !== id));
     },
-    [todoLists, setTodoLists]
+    [todoLists, setTodoLists] // todoLists 와 setTodoLists 사용으로 의존성 리스트 작성
   );
 
   const onToggle = useCallback(
@@ -45,7 +45,7 @@ const App = () => {
           ),
       );
     },
-    [todoLists, setTodoLists]
+    [todoLists, setTodoLists] // todoLists 와 setTodoLists 사용으로 의존성 리스트 작성
   );
 
   return (
