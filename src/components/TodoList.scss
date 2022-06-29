@@ -1,0 +1,6 @@
+.TodoList {
+    min-height: 10px;// 최소
+    max-height: 1000px; // 최대
+    overflow-y: auto; // 필요할 때만 스크롤바
+    overflow-x: auto; //필요할 때만 스크롤바
+}
