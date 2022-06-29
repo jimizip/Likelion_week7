@@ -1,13 +1,19 @@
-import React, { useState, useRef, useCallback } from 'react';
+//import React, { useState, useRef, useCallback } from 'react';
+import React, { useRef, useCallback } from 'react';
 import TodoTemplate from './components/TodoTemplate';
 import TodoInsert from './components/TodoInsert';
 import TodoList from './components/TodoList';
-
+import {
+  useRecoilState,
+  useRecoilValue,
+} from "recoil";
+import { todos } from "./atoms/todos";
 const App = () => {
 
-  const [todos, setTodos] = useState([]); // 배열 안에 아무것도 없다면 한 줄로
-
-  const nextId = useRef(0);
+  //const [todos, setTodos] = useState([]); // 배열 안에 아무것도 없다면 한 줄로
+  const [todoLists, setTodoLists] = useRecoilState(todos); // useState와 사용법 동일
+  const recoilValue = useRecoilValue(todos); // 해당 atom의 값
+  const nextId = useRef(recoilValue);
   
   const onInsert = useCallback(
     text => {
@@ -17,35 +23,35 @@ const App = () => {
         checked: false,
       };
       // concat으로 원본배열은 보존하고 새로운 복사 배열 생성
-      setTodos(todos.concat(todo));
+      setTodoLists(todoLists.concat(todo));
       nextId.current += 1; // nextId 증가
     },
-    [todos],
+    [todoLists, setTodoLists]
   );
 
   const onRemove = useCallback(
     id => {
       // filter를 통해 선택된 값 이외의 배열을 모두 출력
-      setTodos(todos.filter(todo => todo.id !== id));
+      setTodoLists(todoLists.filter(todo => todo.id !== id));
     },
-    [todos],
+    [todoLists, setTodoLists]
   );
 
   const onToggle = useCallback(
     id => {
-      setTodos(
-        todos.map(todo =>
+      setTodoLists(
+        todoLists.map(todo =>
           todo.id === id ? {...todo, checked: !todo.checked} : todo,
           ),
       );
     },
-    [todos],
+    [todoLists, setTodoLists]
   );
 
   return (
       <TodoTemplate>
         <TodoInsert onInsert={onInsert} />
-        <TodoList todos={todos} onRemove={onRemove} onToggle={onToggle} />
+        <TodoList todoLists={todoLists} onRemove={onRemove} onToggle={onToggle} />
       </TodoTemplate>
     );
 };
